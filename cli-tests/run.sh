@@ -193,6 +193,9 @@ run_test()
 				tail -n10 "$t.out.actual" | sed 1>&2 's/^/    /'
 				echo 1>&2
 				echo 1>&2 "See $t.out.actual for the full output."
+				echo 1>&2 "--out--"
+				cat 1>&2 "$t.out.actual"
+				echo 1>&2 "--out--"
 			else
 				echo 1>&2 "Test output:"
 				sed 1>&2 's/^/    /' < "$t.out.actual"
