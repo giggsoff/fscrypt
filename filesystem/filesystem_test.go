@@ -340,6 +340,11 @@ func TestSetPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	// it will adjust PolicyVersion internally
+	if err = policy.Options.CheckValidity(); err != nil {
+		t.Fatal(err)
+	}
+
 	if !proto.Equal(realPolicy, policy) {
 		t.Errorf("policy %+v does not equal expected policy %+v", realPolicy, policy)
 	}
