@@ -690,6 +690,14 @@ func (m *Mount) addMetadata(path string, md metadata.Metadata, owner *user.User)
 		return errors.Wrap(err, "provided metadata is invalid")
 	}
 
+	// store empty PolicyVersion field in case of v1 policy
+	mdObject, isPolicyData := md.(*metadata.PolicyData)
+	if isPolicyData {
+		if mdObject.Options.PolicyVersion == 1 {
+			mdObject.Options.PolicyVersion = 0
+		}
+	}
+
 	data, err := proto.Marshal(md)
 	if err != nil {
 		return err
