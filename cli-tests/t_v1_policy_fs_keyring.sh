@@ -19,11 +19,11 @@ mkdir "$dir"
 chown "$TEST_USER" "$dir"
 
 _print_header "Try to encrypt directory as user"
-_user_do_and_expect_failure "echo hunter2 | fscrypt encrypt --quiet --name=prot '$dir'"
+_user_do_and_expect_failure "echo hunter2 | fscrypt encrypt --quiet --verbose --name=prot '$dir'"
 _expect_failure "fscrypt status '$dir'"
 
 _print_header "Encrypt directory as user with --skip-unlock"
-_user_do "echo hunter2 | fscrypt encrypt --quiet --name=prot --skip-unlock '$dir'"
+_user_do "echo hunter2 | fscrypt encrypt --quiet --verbose --name=prot --skip-unlock '$dir'"
 fscrypt status "$dir"
 _expect_failure "mkdir '$dir/subdir'"
 
